@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}List of Employee{% endblock title %}
+{% block content %}
+    <center>
+    <hr><hr><hr>
+    <h2 class="alert-warning">List of Employees</h2>
+    {% if empl %}
+    <form id="f2">
+        {% csrf_token %}
+        <table class="table table-bordered">
+            <tr>
+                <th>Sr.no</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Email_id</th>
+                <th>Mob_no</th>
+                <th>Designation</th>
+                 <th>Department</th>
+                <th> </th>
+                <th> </th>
+                 <th> </th>
+            </tr>
+            {% for e1 in empl %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ e1.ename }}</td>
+                <td>{{ e1.age }}</td>
+                <td>{{ e1.emailid }}</td>
+                <td>{{ e1.mobno }}</td>
+                <td>{{ e1.designation }}</td>
+                <td>{{ e1.department}}</td>
+                <td><a href="{% url 'emp:Delete' e1.id%}">Delete</a> </td>
+                <td><a href="{% url 'emp:View' e1.id%}">View Details</a></td>
+                <td><a href="{% url 'emp:Edite' e1.id%}">Edit Details</a></td>
+            </tr><tr></tr><tr></tr>
+            {% endfor %}
+        </table>
+    </form>
+    {% else %}
+    <p class="alert-info"> No data found </p><p></p><p></p>
+    {% endif %}
+     <form id="f1" action="{% url 'emp:New' %}">
+        <span class="btn btn-primary">  <a href="{% url 'emp:index' %}" style="color: #ffffff">Back</a></span>
+       <input type="submit" name="submit1" id="new" value="Add New Employee?" class="btn btn-primary" />
+    </form>
+</center>
+{% endblock content %}
+

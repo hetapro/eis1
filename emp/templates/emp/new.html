@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Add New Employee{% endblock title %}
+{% block js %}<script type="text/javascript" src="{{ STATIC_URL }}js/val1.js">
+        </script> {% endblock %}
+{% block content %}
+    <center>
+    <hr><hr><hr>
+    <h2 class="alert-warning">New Employee Detail</h2><hr>
+    <form id="f1" action="{% url 'emp:New'%}" method="post" class="navbar-form" onsubmit="return valueChek();">
+
+       {% csrf_token %}
+
+        <table class="table table-bordered" style="width: 60%">
+        {% if d1 %}
+
+        {{ form.as_table }}
+
+        </table>
+            <div id="error"></div>
+        <span class="btn btn-primary"><a href="{% url 'emp:List' %}" style="color: #ffffff">Back</a></span>
+        <input type="submit" name="add" value="Add" class="btn btn-primary" />
+        <input type="reset" name="reset" value="RESET" class="btn btn-primary"/>
+
+    </form>
+        {% else %}
+    <pre class="alert-info">
+        Currently There is no department yet.
+        First add Department details
+        Go to <a href='{% url 'emp:index' %}'>Home page</a>
+    </pre>
+    {% endif %}
+
+    </center>
+{% endblock content %}
+

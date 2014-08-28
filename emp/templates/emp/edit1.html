@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}List of Department{% endblock title %}
+{% block js %}<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
+    <script src="{{ STATIC_URL }}js/department_edit.js"></script>{% endblock js %}
+{% block content %}
+    <center>
+    <hr><hr><hr>
+   {% csrf_token %}
+
+    <h2 class="alert-warning">Edit Department</h2>
+    <hr>
+    {% if error_message %}<p class="alert-danger"><strong>{{error_message}}</strong></p>{% endif %}
+        {% csrf_token %}
+        Department:<input type="text" maxlength="30" name="dept" id="id_department" value="{{ d1.department_name }}" class="department" />
+    <input type="button" name="back" value="Back" class="btn btn-primary" id="back" />
+        <input type="submit" name="update" value="Update" id="{{ d1.id }}" class="update btn btn-primary" />
+        <div id="error"></div><br/><br/>
+
+
+    </form>
+        </fieldset>
+        </center>
+{% endblock content %}

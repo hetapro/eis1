@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}List of Department{% endblock title %}
+{% block content %}
+    <center>
+    <hr><hr><hr>
+     <h2 class="alert-warning">Employees of {{department.department_name}} department</h2>
+    {% if e3 %}
+    <form id="f2">
+        {% csrf_token %}
+        <table class="table table-bordered">
+            <tr>
+                <th>Sr.no</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Email_id</th>
+                <th>Mob_no</th>
+                <th>Designation</th>
+                <th> </th>
+
+            </tr>
+            {% for e3 in e3 %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ e3.ename }}</td>
+                <td>{{ e3.age }}</td>
+                <td>{{ e3.emailid }}</td>
+                <td>{{ e3.mobno }}</td>
+                <td>{{ e3.designation }}</td>
+                <td><a href="{% url 'emp:View' e3.id%}">View Details</a></td>
+            </tr><tr></tr><tr></tr>
+            {% endfor %}
+        </table>
+    </form>
+    {% else %}
+        <br />
+    <p class="label-info"> No data found </p><p></p><p></p>
+    {% endif %}
+      <span class="btn btn-primary"><a href="{% url 'emp:List1' %}" style="color: #ffffff">Back</a></span>
+</center>
+{% endblock content %}
