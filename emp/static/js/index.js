@@ -11,7 +11,29 @@ $("#list1").click(function (event) {
             $.ajax({
                      type: "GET",
                      success: function () {
+
                             window.location.href="/emp/list1/"
+                     },
+                     error: function (xhr, status, errorThrown) {
+                       console.log("Sorry, there was a problem!");
+                       console.log("Error: " + errorThrown);
+                       console.log("Status: " + status);
+                     }
+
+            });
+
+
+
+     });
+    $("#list").click(function (event) {
+        event.preventDefault();
+             url="/emp/employee/";
+
+            $.ajax({
+                     type: "GET",
+                     success: function () {
+
+                            window.location.href="/emp/list/"
                      },
                      error: function (xhr, status, errorThrown) {
                        console.log("Sorry, there was a problem!");

@@ -1,6 +1,6 @@
 from bsddb import db
 from django.http import HttpResponse, HttpResponseRedirect
-from django.middleware import csrf
+
 from django.shortcuts import render, get_object_or_404
 from django.core.urlresolvers import reverse
 from django.views import generic
@@ -39,9 +39,6 @@ class List1(generic.ListView):
    # def get_queryset(self):
     #   return Department.objects.all()
 
-class New1(generic.TemplateView):
-     template_name = 'emp/new1.html'
-
 class List(generic.ListView):
     context_object_name = 'empl'
     template_name = 'emp/list.html'
@@ -77,15 +74,6 @@ def delete1(request, id):
    e1.delete()
    return HttpResponseRedirect(reverse('emp:List'))
  #  return render(request, 'emp/list.html', {'emp':e1, 'del1_message': "Record succesfully deleted.",})
-
-
-def viewdetail(request, id):
-    e3=Employee.objects.filter(department=id)
-    return render(request,'emp/view1.html', {'e3': e3, 'department':Department.objects.get(pk=id)})
-
-def edit1(request,id):
-    d1=Department.objects.get(pk=id)
-    return render(request, 'emp/edit1.html', {'d1': d1})
 
 def edite(request,id):
     e1=Employee.objects.get(pk=id)

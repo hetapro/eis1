@@ -8,6 +8,7 @@ class Department(models.Model):
         return self.department_name
 
 class Employee(models.Model):
+    employee_id=models.AutoField(primary_key=True)
     ename=models.CharField(max_length=200)
     age=models.IntegerField(default=0)
     emailid=models.EmailField(max_length=200)

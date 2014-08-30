@@ -11,7 +11,7 @@ class DepSerializer(serializers.ModelSerializer):
 class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
         model=Employee
-        fields=['ename','age','emailid','mobno','designation','department']
+        fields=['employee_id','ename','age','emailid','mobno','designation','department']
 
 
 

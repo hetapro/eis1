@@ -1,48 +1,83 @@
 {% extends "base.html" %}
 {% block title %}List of Employee{% endblock title %}
+{% block js %}<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script >
+    <script src="{{ STATIC_URL }}js/list.js"></script>
+    {% endblock js %}
 {% block content %}
     <center>
     <hr><hr><hr>
+    <div id="employeelist">
     <h2 class="alert-warning">List of Employees</h2>
-    {% if empl %}
-    <form id="f2">
-        {% csrf_token %}
-        <table class="table table-bordered">
+    <table class="table table-bordered" id="emp_list1">
             <tr>
-                <th>Sr.no</th>
+
                 <th>Name</th>
                 <th>Age</th>
                 <th>Email_id</th>
                 <th>Mob_no</th>
                 <th>Designation</th>
                  <th>Department</th>
-                <th> </th>
-                <th> </th>
-                 <th> </th>
+                <th>View details</th>
+                <th>Edit Record</th>
+                 <th>Delete Record</th>
             </tr>
-            {% for e1 in empl %}
-            <tr>
-                <td>{{ forloop.counter }}</td>
-                <td>{{ e1.ename }}</td>
-                <td>{{ e1.age }}</td>
-                <td>{{ e1.emailid }}</td>
-                <td>{{ e1.mobno }}</td>
-                <td>{{ e1.designation }}</td>
-                <td>{{ e1.department}}</td>
-                <td><a href="{% url 'emp:Delete' e1.id%}">Delete</a> </td>
-                <td><a href="{% url 'emp:View' e1.id%}">View Details</a></td>
-                <td><a href="{% url 'emp:Edite' e1.id%}">Edit Details</a></td>
-            </tr><tr></tr><tr></tr>
-            {% endfor %}
+    </table>
+        <input type="button" name="back" id="back" value="Back" class="btn btn-primary" />
+       <input type="button" name="newwmployee" id="newemployee" value="Add New Employee?" class="btn btn-primary" />
+ </div>
+ <div id="editemployee" style="display: none">
+      <h2 class="alert-warning">Edit Employee Details</h2><hr>
+
+        <table class="table table-bordered" style="width: 60%">
+       <tr><th> Name:</th><td><input type="text" maxlength="30" name="e2" id="ename1"/><div id="name"></div></td></tr>
+        <tr><th>  Age:</th><td><input type="text" maxlength="30" name="e3" id="age1" /><div id="name"></div></td></tr>
+       <tr><th>  Email id:</th><td><input type="text" maxlength="30" name="e4" id="email1"/><div id="name"></div></td></tr>
+        <tr><th> Mobile No:</th><td><input type="text" maxlength="30" name="e5" id="mob1"/><div id="name"></div></td></tr>
+        <tr><th> Designation:</th><td><input type="text" maxlength="30" name="e6" id="designation1"/><div id="name"></div></td></tr>
+        <tr><th> Department:</th><td><select name="e7" id="dropdepartment"></select>
+        </td></tr>
+
         </table>
-    </form>
-    {% else %}
-    <p class="alert-info"> No data found </p><p></p><p></p>
-    {% endif %}
-     <form id="f1" action="{% url 'emp:New' %}">
-        <span class="btn btn-primary">  <a href="{% url 'emp:index' %}" style="color: #ffffff">Back</a></span>
-       <input type="submit" name="submit1" id="new" value="Add New Employee?" class="btn btn-primary" />
-    </form>
+       <input type="button" name="back" id="back1" value="Back" class="btn btn-primary" />
+        <input type="button" name="update" value="Update" class="btn btn-primary" />
+
+ </div>
+    <div id="viewemployee" style="display: none">
+         <h2 class="alert-warning" id="viewemp"></h2><hr>
+
+    <table class="table table-striped" id="viewtable" border="1" style="width: 60%">
+        <tr></tr><tr></tr>
+        <tr><th>Name</th><th id="ename2"></th></tr>
+        <tr><th>Age</th><th id="age2"></th></tr>
+        <tr><th>Email id</th><th id="email2"></th></tr>
+        <tr><th>Mobile No</th><th id="mob2"></th></tr>
+        <tr><th>Designation</th><th id="designation2"></th></tr>
+        <tr><th>Department</th><th id="department2"></th></tr>
+    </table>
+    <input type="button" name="back" id="back2" value="Back" class="btn btn-primary" />
+    </div>
+ <div id="newemp" style="display: none">
+      <h2 class="alert-warning">Edit Employee Details</h2><hr>
+
+        <table class="table table-bordered" style="width: 60%">
+       <tr><th> Name:</th><td><input type="text" maxlength="30" name="e2" id="ename_new"/><div id="new1"></div></td></tr>
+        <tr><th>  Age:</th><td><input type="text" maxlength="30" name="e3" id="age_new" /><div id="new2"></div></td></tr>
+       <tr><th>  Email id:</th><td><input type="text" maxlength="30" name="e4" id="email_new"/><div id="new3"></div></td></tr>
+        <tr><th> Mobile No:</th><td><input type="text" maxlength="30" name="e5" id="mob_new"/><div id="new4"></div></td></tr>
+        <tr><th> Designation:</th><td><input type="text" maxlength="30" name="e6" id="designation_new"/><div id="new5"></div></td></tr>
+        <tr><th> Department:</th><td><select name="e7" id="dropdepartment1"></select>
+        </td></tr>
+
+        </table>
+       <input type="button" name="back" id="back3" value="Back" class="btn btn-primary" />
+        <input type="button" name="add" id="add" value="Add" class="btn btn-primary" />
+        <input type="button" name="Reset" value="reset" id="reset_emp" class="btn btn-primary" />
+
+ </div>
+    <div id="newerror" style="display: none">
+        <pre class="alert-info">Currently there is no department. Add department first.</pre>
+
+    </div>
 </center>
 {% endblock content %}
 
